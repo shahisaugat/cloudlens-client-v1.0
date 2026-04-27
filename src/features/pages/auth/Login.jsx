@@ -22,14 +22,11 @@ const inputBlurStyle = {
   outline: "none",
 };
 
-export default function Signup() {
+export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
-  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
-  const [agreeTerms, setAgreeTerms] = useState(false);
-  const [name, setName] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -54,10 +51,10 @@ export default function Signup() {
       <div className="w-full max-w-sm">
         <div className="mb-8">
           <h1 className="text-2xl font-black text-gray-900 mb-2">
-            Create account
+            Welcome back
           </h1>
           <p className="text-md text-gray-500">
-            Join Cloud Lens to start monitoring your CI/CD pipelines.
+            Sign in to your Cloud Lens account.
           </p>
         </div>
 
@@ -71,35 +68,18 @@ export default function Signup() {
           }}
         >
           <FaGithub size={17} />
-          Sign up with GitHub
+          Continue with GitHub
         </button>
 
         <div className="flex items-center gap-3 mb-6">
           <div className="flex-1 h-px" style={{ background: "#C8D0DA" }} />
           <span className="text-sm font-medium text-gray-400">
-            or sign up with email
+            or sign in with email
           </span>
           <div className="flex-1 h-px" style={{ background: "#C8D0DA" }} />
         </div>
 
         <div className="flex flex-col gap-4">
-          {/* Full Name */}
-          <div className="flex flex-col gap-1.5">
-            <label className="text-md font-semibold text-gray-700">
-              Full name
-            </label>
-            <input
-              type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="w-full rounded-xl px-4 py-3 text-md"
-              placeholder="John Doe"
-              style={inputBaseStyle}
-              onFocus={(e) => Object.assign(e.target.style, inputFocusStyle)}
-              onBlur={(e) => Object.assign(e.target.style, inputBlurStyle)}
-            />
-          </div>
-
           {/* Email */}
           <div className="flex flex-col gap-1.5">
             <label className="text-md font-semibold text-gray-700">
@@ -119,9 +99,18 @@ export default function Signup() {
 
           {/* Password */}
           <div className="flex flex-col gap-1.5">
-            <label className="text-md font-semibold text-gray-700">
-              Password
-            </label>
+            <div className="flex justify-between">
+              <label className="text-md font-semibold text-gray-700">
+                Password
+              </label>
+              <a
+                href="/forgot-password"
+                className="text-sm font-medium hover:underline"
+                style={{ color: "#0061AA" }}
+              >
+                Forgot password?
+              </a>
+            </div>
             <div className="relative">
               <input
                 type={showPassword ? "text" : "password"}
@@ -143,44 +132,18 @@ export default function Signup() {
             </div>
           </div>
 
-          {/* Confirm Password */}
-          <div className="flex flex-col gap-1.5">
-            <label className="text-md font-semibold text-gray-700">
-              Confirm password
-            </label>
-            <div className="relative">
-              <input
-                type={showConfirmPassword ? "text" : "password"}
-                value={confirmPassword}
-                onChange={(e) => setConfirmPassword(e.target.value)}
-                className="w-full rounded-xl px-4 py-3 pr-11 text-md"
-                placeholder="••••••••"
-                style={inputBaseStyle}
-                onFocus={(e) => Object.assign(e.target.style, inputFocusStyle)}
-                onBlur={(e) => Object.assign(e.target.style, inputBlurStyle)}
-              />
-              <button
-                type="button"
-                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition-colors"
-              >
-                {showConfirmPassword ? <EyeOff size={16} /> : <Eye size={16} />}
-              </button>
-            </div>
-          </div>
-
-          {/* Terms Agreement */}
-          <div className="flex items-start gap-2.5">
+          {/* Remember me */}
+          <div className="flex items-center gap-2.5">
             <button
               type="button"
-              onClick={() => setAgreeTerms(!agreeTerms)}
-              className="w-5 h-5 rounded-md border-2 flex items-center justify-center transition-all shrink-0 mt-0.5"
+              onClick={() => setRememberMe(!rememberMe)}
+              className="w-5 h-5 rounded-md border-2 flex items-center justify-center transition-all shrink-0"
               style={{
-                borderColor: agreeTerms ? "#0061AA" : "#C8D0DA",
-                background: agreeTerms ? "#0061AA" : "#FAFCFF",
+                borderColor: rememberMe ? "#0061AA" : "#C8D0DA",
+                background: rememberMe ? "#0061AA" : "#FAFCFF",
               }}
             >
-              {agreeTerms && (
+              {rememberMe && (
                 <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
                   <path
                     d="M2 5l2.5 2.5L8 3"
@@ -193,22 +156,7 @@ export default function Signup() {
               )}
             </button>
             <span className="text-sm text-gray-600">
-              I agree to the{" "}
-              <a
-                href="/terms"
-                className="font-semibold hover:underline"
-                style={{ color: "#0061AA" }}
-              >
-                Terms of Service
-              </a>{" "}
-              and{" "}
-              <a
-                href="/privacy"
-                className="font-semibold hover:underline"
-                style={{ color: "#0061AA" }}
-              >
-                Privacy Policy
-              </a>
+              Remember me for 30 days
             </span>
           </div>
 
@@ -218,18 +166,18 @@ export default function Signup() {
             className="w-full rounded-xl py-3 text-md font-black text-white transition-all hover:brightness-90 active:scale-[0.98] mt-4"
             style={{ background: "#0061AA" }}
           >
-            Create account
+            Sign in
           </button>
         </div>
 
         <p className="mt-6 text-center text-sm text-gray-500">
-          Already have an account?{" "}
+          Don't have an account?{" "}
           <a
-            href="/login"
+            href="/cloudlens-client-v1.0/src/features/pages/auth/Signup"
             className="font-semibold hover:underline"
             style={{ color: "#0061AA" }}
           >
-            Sign in
+            Sign up free
           </a>
         </p>
       </div>

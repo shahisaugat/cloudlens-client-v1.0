@@ -1,6 +1,6 @@
 import { FaGithub, FaTwitter, FaLinkedin } from "react-icons/fa";
 import { motion } from "framer-motion";
-import logo from "../assets/logo.svg";
+import logo from "../../assets/svgs/logo.svg";
 
 export default function Footer() {
   const containerVariants = {
