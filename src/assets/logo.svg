@@ -1,0 +1,16 @@
+<svg width="200" height="200" viewBox="0 0 192 192" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Top Left Frame Segment (Dark Brand Blue) -->
+  <path d="M48 24C34.7452 24 24 34.7452 24 48V92H40V56C40 47.1634 47.1634 40 56 40H92V24H48Z" fill="#00368C"/>
+  
+  <!-- Top Right Frame Segment (Medium Brand Blue) -->
+  <path d="M144 24C157.255 24 168 34.7452 168 48V104H152V56C152 47.1634 144.837 40 136 40H120V24H144Z" fill="#0061AA"/>
+  
+  <!-- Bottom Left Frame Segment (Light Brand Blue) -->
+  <path d="M48 168C34.7452 168 24 157.255 24 144V116H40V136C40 144.837 47.1634 152 56 152H96V168H48Z" fill="#4A8FD8"/>
+  
+  <!-- Center Lens (Dark Brand Blue) -->
+  <circle cx="96" cy="96" r="24" fill="#00368C"/>
+  
+  <!-- Bottom Right Focus Dot (Very Light Brand Blue) -->
+  <circle cx="144" cy="144" r="16" fill="#B3D9FF"/>
+</svg>
