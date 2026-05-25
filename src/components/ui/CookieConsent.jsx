@@ -6,7 +6,7 @@ const BRAND = {
   primaryHover: "#004f8a",
   cardBg: "#FAFCFF",
   headerBg: "#F3F6FA",
-  border: "#D6E6F7",
+  border: "#edededff",
 };
 
 const COOKIE_KEY = "cloudlens_cookie_consent";
@@ -53,7 +53,7 @@ export default function CookieConsent() {
     <>
       {/* Backdrop */}
       {showManage && (
-        <div className="fixed inset-0 z-40 bg-black/20 backdrop-blur-sm" />
+        <div className="fixed inset-0 z-40 bg-black/40 dark:bg-black/60 backdrop-blur-sm" />
       )}
 
       <div
@@ -62,33 +62,26 @@ export default function CookieConsent() {
           bottom-0 left-0 right-0 w-full
           sm:bottom-6 sm:left-6 sm:right-auto sm:w-95
           rounded-t-2xl sm:rounded-2xl
-          border shadow-sm transition-all
+          shadow-2xl border secondary-btn-border bg-[#FAFCFF] dark:bg-[#0B0F19] transition-all
         "
         style={{
-          background: BRAND.cardBg,
-          borderColor: BRAND.border,
-          boxShadow: "0 6px 20px rgba(0,0,0,0.06)",
+          boxShadow: "0 6px 20px rgba(0,0,0,0.12)",
         }}
       >
         {/* Header */}
         <div
-          className="flex items-center gap-2.5 px-5 py-3 border-b rounded-t-2xl"
-          style={{
-            background: BRAND.headerBg,
-            borderColor: BRAND.border,
-          }}
+          className="flex items-center gap-2.5 px-5 py-3 border-b secondary-btn-border bg-[#F3F6FA] dark:bg-[#111827] rounded-t-2xl"
         >
-          <Settings size={16} style={{ color: BRAND.primary }} />
+          <Settings size={16} className="text-gray-700 dark:text-gray-300" />
           <span
-            className="text-sm font-semibold"
-            style={{ color: BRAND.primary }}
+            className="text-sm font-semibold text-[#0061AA] dark:text-blue-400"
           >
             Cookie Preferences
           </span>
 
           <button
             onClick={() => save(false)}
-            className="ml-auto text-gray-400 hover:text-gray-600 transition-colors"
+            className="ml-auto text-gray-400 dark:text-gray-500 hover:text-gray-650 dark:hover:text-gray-300 transition-colors cursor-pointer"
           >
             <X size={16} />
           </button>
@@ -96,7 +89,7 @@ export default function CookieConsent() {
 
         {/* MAIN */}
         {!showManage ? (
-          <div className="px-5 py-4 text-sm text-gray-600 leading-relaxed">
+          <div className="px-5 py-4 text-sm text-gray-600 dark:text-gray-300 leading-relaxed">
             <p className="mb-4 sm:max-w-75">
               We use cookies to improve your experience and analyze usage.
             </p>
@@ -105,7 +98,7 @@ export default function CookieConsent() {
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
               <button
                 onClick={() => setShowManage(true)}
-                className="text-sm text-gray-500 hover:text-gray-700 transition text-left"
+                className="text-sm text-gray-700 dark:text-gray-200 hover:text-gray-900 dark:hover:text-white transition text-left cursor-pointer font-bold"
               >
                 Preferences
               </button>
@@ -113,16 +106,14 @@ export default function CookieConsent() {
               <div className="flex gap-2 justify-end">
                 <button
                   onClick={() => save(false)}
-                  className="px-3 py-1.5 text-sm rounded-lg border"
-                  style={{ borderColor: BRAND.border }}
+                  className="px-3 py-1.5 text-sm rounded-lg border secondary-btn-border bg-white dark:bg-[#0B0F19] text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-900 transition cursor-pointer"
                 >
                   Reject
                 </button>
 
                 <button
                   onClick={() => save(true)}
-                  className="px-3 py-1.5 text-sm rounded-lg text-white"
-                  style={{ background: BRAND.primary }}
+                  className="px-3 py-1.5 text-sm rounded-lg text-white bg-[#0061AA] hover:bg-[#004d8a] transition cursor-pointer font-bold"
                 >
                   Accept
                 </button>
@@ -134,8 +125,7 @@ export default function CookieConsent() {
           <div className="px-5 py-4 max-h-[60vh] overflow-y-auto">
             <button
               onClick={() => setShowManage(false)}
-              className="flex items-center gap-1.5 text-xs font-medium mb-4 hover:opacity-70"
-              style={{ color: BRAND.primary }}
+              className="flex items-center gap-1.5 text-xs font-semibold mb-4 text-[#0061AA] dark:text-blue-400 hover:opacity-70 cursor-pointer"
             >
               <ArrowLeft size={14} />
               Back
@@ -162,17 +152,13 @@ export default function CookieConsent() {
               ].map((item) => (
                 <div
                   key={item.key}
-                  className="rounded-lg border p-3 flex items-center justify-between"
-                  style={{
-                    borderColor: BRAND.border,
-                    background: BRAND.headerBg,
-                  }}
+                  className="rounded-lg border secondary-btn-border p-3 flex items-center justify-between bg-[#F3F6FA] dark:bg-[#111827]"
                 >
                   <div>
-                    <div className="text-xs font-semibold text-gray-800">
+                    <div className="text-xs font-semibold text-gray-805 dark:text-gray-200">
                       {item.label}
                     </div>
-                    <div className="text-[11px] text-gray-500">{item.desc}</div>
+                    <div className="text-[11px] text-gray-500 dark:text-gray-400">{item.desc}</div>
                   </div>
 
                   <button
@@ -181,19 +167,17 @@ export default function CookieConsent() {
                       !item.locked &&
                       setPrefs((p) => ({ ...p, [item.key]: !p[item.key] }))
                     }
-                    className="relative w-9 h-5 rounded-full transition"
+                    className={`relative w-9 h-5 rounded-full transition cursor-pointer ${
+                      prefs[item.key] ? "bg-[#0061AA]" : "bg-gray-300 dark:bg-slate-700"
+                    }`}
                     style={{
-                      background: prefs[item.key] ? BRAND.primary : "#D1D5DB",
                       opacity: item.locked ? 0.5 : 1,
                     }}
                   >
                     <span
-                      className="absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full shadow transition"
-                      style={{
-                        transform: prefs[item.key]
-                          ? "translateX(16px)"
-                          : "translateX(0)",
-                      }}
+                      className={`absolute top-0.5 left-0.5 w-4 h-4 bg-white rounded-full shadow transition-transform ${
+                        prefs[item.key] ? "translate-x-4" : "translate-x-0"
+                      }`}
                     />
                   </button>
                 </div>
@@ -202,8 +186,7 @@ export default function CookieConsent() {
 
             <button
               onClick={() => save(false)}
-              className="w-full rounded-lg py-2 text-sm font-semibold text-white"
-              style={{ background: BRAND.primary }}
+              className="w-full rounded-lg py-2 text-sm font-semibold text-white bg-[#0061AA] hover:bg-[#004d8a] cursor-pointer"
             >
               Save preferences
             </button>
@@ -212,24 +195,19 @@ export default function CookieConsent() {
 
         {/* Footer */}
         <div
-          className="px-5 py-2.5 border-t flex items-center justify-between rounded-b-2xl"
-          style={{
-            borderColor: BRAND.border,
-            background: BRAND.cardBg,
-          }}
+          className="px-5 py-2.5 border-t secondary-btn-border flex items-center justify-between bg-[#FAFCFF] dark:bg-[#0B0F19] rounded-b-2xl"
         >
-          <span className="text-xs font-medium text-gray-500">
+          <span className="text-xs font-medium text-gray-500 dark:text-gray-400">
             Cloud Lens · Privacy first
           </span>
           <a
             href="/privacy"
-            className="text-xs font-medium underline underline-offset-2 hover:opacity-70"
-            style={{ color: BRAND.primary }}
+            className="text-xs font-semibold underline underline-offset-2 text-[#0061AA] dark:text-blue-400 hover:opacity-70"
           >
             Privacy Policy
           </a>
         </div>
       </div>
     </>
-  );
+  );;
 }

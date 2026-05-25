@@ -56,7 +56,7 @@ export default function Footer() {
       whileInView={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
       viewport={{ once: true, amount: 0.2 }}
-      className="bg-[#FAFCFF] border-t border-gray-200 px-6 md:px-10 pt-14 pb-9"
+      className="bg-[#FAFCFF] dark:bg-[#080B10] border-t footer-border-t px-6 md:px-10 pt-14 pb-9 transition-colors duration-300"
     >
       <div className="mx-auto max-w-5xl">
         {/* Top grid */}
@@ -76,14 +76,14 @@ export default function Footer() {
                 alt="Cloud Lens logo"
                 className="h-8 w-8 object-contain shrink-0"
               />
-              <span className="text-lg font-black leading-tight">
+              <span className="text-lg font-black leading-tight text-gray-900 dark:text-white">
                 <span className="font-black">Cloud</span>{" "}
-                <span className="font-black text-[#0061AA]">Lens</span>
+                <span className="font-black text-[#0061AA] dark:text-blue-500">Lens</span>
               </span>
             </div>
 
             {/* Description */}
-            <p className="mt-3 mb-5 text-base leading-relaxed text-gray-600 max-w-52">
+            <p className="mt-3 mb-5 text-base leading-relaxed text-gray-505 dark:text-gray-400 max-w-52">
               Real-time CI/CD observability for engineering teams who ship fast
               and fix faster.
             </p>
@@ -94,7 +94,7 @@ export default function Footer() {
                 <button
                   key={label}
                   aria-label={label}
-                  className="w-8 h-8 flex items-center justify-center rounded-lg border border-gray-200 bg-white text-gray-500 hover:border-gray-300 hover:bg-gray-50 hover:text-gray-700 transition-colors"
+                  className="w-8 h-8 flex items-center justify-center rounded-lg border secondary-btn-border bg-white dark:bg-[#0B0F19] text-gray-500 dark:text-gray-400 hover:border-gray-300 dark:hover:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-900 hover:text-gray-700 dark:hover:text-white transition-colors cursor-pointer"
                 >
                   {icon}
                 </button>
@@ -105,7 +105,7 @@ export default function Footer() {
           {/* Nav link columns */}
           {navLinks.map((col) => (
             <motion.div key={col.label} variants={itemVariants}>
-              <p className="mb-4 text-md font-[1000] tracking-wide text-gray-900">
+              <p className="mb-4 text-md font-[1000] tracking-wide text-gray-900 dark:text-white">
                 {col.label}
               </p>
               <ul className="flex flex-col gap-2.5">
@@ -113,7 +113,7 @@ export default function Footer() {
                   <li key={link}>
                     <a
                       href="#"
-                      className="text-base font-medium leading-relaxed text-gray-600 hover:text-gray-900 transition-colors"
+                      className="text-base font-medium leading-relaxed text-gray-600 dark:text-gray-450 hover:text-gray-900 dark:hover:text-white transition-colors"
                     >
                       {link}
                     </a>
@@ -125,7 +125,7 @@ export default function Footer() {
         </motion.div>
 
         {/* Divider */}
-        <div className="border-t border-gray-100 mb-6" />
+        <div className="border-t footer-border-t mb-6" />
 
         {/* Bottom bar */}
         <motion.div
@@ -142,7 +142,7 @@ export default function Footer() {
               alt="Cloud Lens logo"
               className="h-4 w-4 object-contain shrink-0"
             />
-            <span className="text-sm font-medium text-gray-600">
+            <span className="text-sm font-medium text-gray-600 dark:text-gray-400">
               © 2025 Cloud Lens. All rights reserved.
             </span>
           </div>
@@ -153,7 +153,7 @@ export default function Footer() {
               <a
                 key={item}
                 href="#"
-                className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors"
+                className="text-sm font-medium text-gray-600 dark:text-gray-450 hover:text-gray-900 dark:hover:text-white transition-colors"
               >
                 {item}
               </a>

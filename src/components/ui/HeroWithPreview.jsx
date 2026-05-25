@@ -8,7 +8,7 @@ const AVATARS = [
 ];
 
 const btnClass =
-  "rounded-lg border border-gray-300 bg-[#FAFCFF] px-8 py-3 text-base font-bold text-gray-900 transition-all duration-200 hover:border-gray-400 hover:bg-gray-50";
+  "rounded-lg border secondary-btn-border px-8 py-3 text-base font-bold transition-all duration-200";
 
 const primaryBtnClass =
   "rounded-lg bg-[#0061AA] px-8 py-3 text-base font-bold text-white transition-all duration-200 hover:bg-[#004f8a] hover:shadow-md active:scale-[0.98]";
@@ -201,12 +201,16 @@ const STATUS_ICON_MAP = {
 
 const StatusIcon = ({ status }) => STATUS_ICON_MAP[status] ?? null;
 
+const statusBadgeStyles = {
+  running: "bg-yellow-50 dark:bg-yellow-950/30 text-yellow-700 dark:text-yellow-400 border border-yellow-100 dark:border-yellow-900/30",
+  passed: "bg-green-50 dark:bg-emerald-950/30 text-green-700 dark:text-emerald-400 border border-green-100 dark:border-emerald-900/30",
+  failed: "bg-red-50 dark:bg-rose-950/30 text-red-700 dark:text-rose-450 border border-red-100 dark:border-rose-900/30",
+};
+
 const Card = ({ stats, pipelines, variant = "dashboard", desktop = false }) => (
   <div
-    className="w-full max-w-sm sm:max-w-none sm:w-[calc(90vw+16px)] md:w-[90vw] lg:w-[64vw] rounded-2xl border shadow-lg overflow-hidden will-change-transform"
+    className="w-full max-w-sm sm:max-w-none sm:w-[calc(90vw+16px)] md:w-[90vw] lg:w-[64vw] rounded-2xl border saas-card-border bg-[#FAFCFF] dark:bg-[#0B0F19] shadow-lg overflow-hidden will-change-transform"
     style={{
-      background: BRAND.cardBg,
-      borderColor: BRAND.border,
       backfaceVisibility: "hidden",
       WebkitBackfaceVisibility: "hidden",
       transform: "translateZ(0)",
@@ -214,8 +218,7 @@ const Card = ({ stats, pipelines, variant = "dashboard", desktop = false }) => (
   >
     {/* Titlebar */}
     <div
-      className={`flex items-center px-6 border-b ${desktop ? "h-13" : "h-12"}`}
-      style={{ background: BRAND.headerBg, borderColor: BRAND.border }}
+      className={`flex items-center px-6 border-b saas-card-border-b ${desktop ? "h-13" : "h-12"} bg-[#F3F6FA] dark:bg-[#111827]`}
     >
       <div className="flex items-center gap-1.5">
         <div
@@ -228,7 +231,7 @@ const Card = ({ stats, pipelines, variant = "dashboard", desktop = false }) => (
           className={`rounded-full bg-green-600 ${desktop ? "w-3.5 h-3.5" : "w-3 h-3"}`}
         />
       </div>
-      <span className="ml-auto text-sm font-semibold tracking-wide text-gray-600">
+      <span className="ml-auto text-sm font-semibold tracking-wide text-gray-600 dark:text-gray-400">
         {TITLE_MAP[variant]}
       </span>
     </div>
@@ -241,22 +244,21 @@ const Card = ({ stats, pipelines, variant = "dashboard", desktop = false }) => (
         {stats.map((s) => (
           <div
             key={s.label}
-            className={`rounded-lg bg-[#FAFCFF] border flex items-start ${desktop ? "p-5 gap-4" : "p-4 gap-3"}`}
-            style={{ borderColor: BRAND.border }}
+            className={`rounded-lg bg-[#FAFCFF] dark:bg-[#111827]/40 border saas-card-border flex items-start ${desktop ? "p-5 gap-4" : "p-4 gap-3"}`}
           >
             <div
-              className={`rounded-md flex items-center justify-center shrink-0 ${s.iconBg} ${desktop ? "w-11 h-11" : "w-10 h-10"}`}
+              className={`rounded-md flex items-center justify-center shrink-0 ${s.iconBg} dark:bg-blue-950/40 dark:text-blue-400 ${desktop ? "w-11 h-11" : "w-10 h-10"}`}
             >
               {s.icon}
             </div>
             <div>
               <div
-                className={`font-medium text-gray-500 mb-1 ${desktop ? "text-sm" : "text-xs"}`}
+                className={`font-medium text-gray-500 dark:text-gray-400 mb-1 ${desktop ? "text-sm" : "text-xs"}`}
               >
                 {s.label}
               </div>
               <div
-                className={`font-bold text-gray-900 mb-1 ${desktop ? (s.valueSize ?? "text-2xl") : (s.valueSize ?? "text-2xl")}`}
+                className={`font-bold text-gray-900 dark:text-white mb-1 ${desktop ? (s.valueSize ?? "text-2xl") : (s.valueSize ?? "text-2xl")}`}
               >
                 {s.value}
               </div>
@@ -272,22 +274,16 @@ const Card = ({ stats, pipelines, variant = "dashboard", desktop = false }) => (
 
       {/* Pipeline table */}
       <div
-        className="rounded-lg border overflow-hidden"
-        style={{ borderColor: BRAND.border }}
+        className="rounded-lg border saas-card-border overflow-hidden"
       >
         <div
-          className={`font-semibold ${desktop ? "px-7 py-3.5 text-base" : "px-6 py-3 text-sm"}`}
-          style={{
-            background: BRAND.headerBg,
-            color: BRAND.primary,
-            borderBottom: `1px solid ${BRAND.border}`,
-          }}
+          className={`font-semibold bg-[#F3F6FA] dark:bg-[#111827] text-[#0061AA] dark:text-blue-400 border-b saas-card-border-b ${desktop ? "px-7 py-3.5 text-base" : "px-6 py-3 text-sm"}`}
         >
           Live pipeline feed
         </div>
         <table className="w-full">
           <thead>
-            <tr className="bg-gray-50">
+            <tr className="bg-gray-50 dark:bg-[#111827]/40">
               {[
                 "Pipeline",
                 "Branch",
@@ -298,44 +294,44 @@ const Card = ({ stats, pipelines, variant = "dashboard", desktop = false }) => (
               ].map((col) => (
                 <th
                   key={col}
-                  className={`text-left font-medium text-gray-400 uppercase ${desktop ? "px-6 py-3 text-sm" : "px-4 py-2 text-xs"}`}
+                  className={`text-left font-medium text-gray-400 dark:text-gray-500 uppercase ${desktop ? "px-6 py-3 text-sm" : "px-4 py-2 text-xs"}`}
                 >
                   {col}
                 </th>
               ))}
             </tr>
           </thead>
-          <tbody className="divide-y divide-gray-100">
+          <tbody className="divide-y divide-gray-100 dark:divide-gray-850">
             {pipelines.map((p) => (
-              <tr key={p.name} className="hover:bg-gray-50">
+              <tr key={p.name} className="hover:bg-gray-50 dark:hover:bg-[#111827]/20">
                 <td
-                  className={`font-semibold ${desktop ? "px-6 py-4 text-base" : "px-4 py-3 text-sm"}`}
+                  className={`font-semibold text-gray-900 dark:text-white ${desktop ? "px-6 py-4 text-base" : "px-4 py-3 text-sm"}`}
                 >
                   {p.name}
                 </td>
                 <td
-                  className={`${desktop ? "px-6 py-4 text-sm" : "px-4 py-3 text-xs"}`}
+                  className={`text-gray-650 dark:text-gray-300 ${desktop ? "px-6 py-4 text-sm" : "px-4 py-3 text-xs"}`}
                 >
                   {p.branch}
                 </td>
                 <td
-                  className={`text-gray-400 ${desktop ? "px-6 py-4 text-sm" : "px-4 py-3 text-xs"}`}
+                  className={`text-gray-400 dark:text-gray-550 ${desktop ? "px-6 py-4 text-sm" : "px-4 py-3 text-xs"}`}
                 >
                   {p.hash}
                 </td>
                 <td
-                  className={`${desktop ? "px-6 py-4 text-sm" : "px-4 py-3 text-sm"}`}
+                  className={`text-gray-900 dark:text-gray-100 ${desktop ? "px-6 py-4 text-sm" : "px-4 py-3 text-sm"}`}
                 >
                   {p.duration}
                 </td>
                 <td
-                  className={`text-gray-400 ${desktop ? "px-6 py-4 text-sm" : "px-4 py-3 text-sm"}`}
+                  className={`text-gray-400 dark:text-gray-550 ${desktop ? "px-6 py-4 text-sm" : "px-4 py-3 text-sm"}`}
                 >
                   {p.time}
                 </td>
                 <td className={`${desktop ? "px-6 py-4" : "px-4 py-3"}`}>
                   <span
-                    className={`inline-flex items-center gap-1.5 rounded-full font-medium ${p.statusBg} ${desktop ? "text-sm px-3 py-1.5" : "text-xs px-2 py-1"}`}
+                    className={`inline-flex items-center gap-1.5 rounded-full font-medium ${statusBadgeStyles[p.status] || p.statusBg} ${desktop ? "text-sm px-3 py-1.5" : "text-xs px-2 py-1"}`}
                   >
                     <StatusIcon status={p.status} />
                     {p.status}
@@ -419,7 +415,7 @@ export default function HeroWithPreview() {
   });
 
   return (
-    <div className="bg-[#FAFCFF]">
+    <div className="bg-[#FAFCFF] dark:bg-[#080B10] transition-colors duration-300">
       {/* ── HERO TEXT — all breakpoints ── */}
       <section className="px-6 md:px-10 pt-24 md:pt-28 pb-10 md:pb-8 text-center">
         <div className="mx-auto max-w-3xl">
@@ -427,10 +423,9 @@ export default function HeroWithPreview() {
             initial="hidden"
             animate="visible"
             variants={badgeVariants}
-            className="mb-5 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-medium"
-            style={{ background: "#e0f0ff", color: "#0061AA" }}
+            className="mb-5 inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-sm font-medium bg-[#e0f0ff] dark:bg-blue-950/40 text-[#0061AA] dark:text-blue-400"
           >
-            <div className="h-1.5 w-1.5 rounded-full bg-[#0061AA]" />
+            <div className="h-1.5 w-1.5 rounded-full bg-[#0061AA] dark:bg-blue-400" />
             Now with multi-repo support
           </motion.div>
 
@@ -438,7 +433,7 @@ export default function HeroWithPreview() {
             initial="hidden"
             animate="visible"
             variants={titleVariants}
-            className="mb-3 text-4xl font-bold leading-tight tracking-normal text-gray-900 md:text-5xl lg:text-6xl"
+            className="mb-3 text-4xl font-bold leading-tight tracking-normal text-gray-900 dark:text-white md:text-5xl lg:text-6xl"
           >
             Your CI/CD pipelines, finally under control
           </motion.h1>
@@ -447,7 +442,7 @@ export default function HeroWithPreview() {
             initial="hidden"
             animate="visible"
             variants={descVariants}
-            className="mx-auto mb-8 max-w-2xl text-base leading-relaxed text-gray-600 md:text-lg"
+            className="mx-auto mb-8 max-w-2xl text-base leading-relaxed text-gray-600 dark:text-gray-400 md:text-lg"
           >
             Real-time pipeline visibility, failure intelligence, and team
             analytics — without the complexity of enterprise tools.
@@ -459,12 +454,12 @@ export default function HeroWithPreview() {
             variants={buttonsVariants}
             className="mb-8 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4"
           >
-            <button type="button" className={`${btnClass} w-full sm:w-auto`}>
+            <button type="button" className={`${btnClass} w-full sm:w-auto bg-[#FAFCFF] dark:bg-[#0B0F19] text-gray-900 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-900/60`}>
               Connect GitHub — it's free
             </button>
             <button
               type="button"
-              className={`${primaryBtnClass} w-full sm:w-auto`}
+              className={`${primaryBtnClass} w-full sm:w-auto bg-[#0061AA] hover:bg-[#004d8a]`}
             >
               See live demo
             </button>
@@ -480,7 +475,7 @@ export default function HeroWithPreview() {
               {AVATARS.map((av, i) => (
                 <div
                   key={av.initials}
-                  className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-white text-xs font-bold"
+                  className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-white dark:border-gray-900 text-xs font-bold"
                   style={{
                     background: av.bg,
                     color: av.color,
@@ -491,7 +486,7 @@ export default function HeroWithPreview() {
                 </div>
               ))}
             </div>
-            <span className="text-sm text-gray-600">
+            <span className="text-sm text-gray-600 dark:text-gray-400">
               Trusted by 200+ engineering teams
             </span>
           </motion.div>

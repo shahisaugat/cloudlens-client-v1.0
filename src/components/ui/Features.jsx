@@ -77,26 +77,12 @@ function TiltCard({ feature }) {
         rotateY: rY,
         transformStyle: "preserve-3d",
         perspective: 1000,
-        // Glass effect
-        background: "rgba(255, 255, 255, 0.55)",
-        backdropFilter: "blur(16px) saturate(160%)",
-        WebkitBackdropFilter: "blur(16px) saturate(160%)",
-        border: "1px solid rgba(255, 255, 255, 0.75)",
-        boxShadow:
-          "0 4px 24px 0 rgba(0, 97, 170, 0.07), 0 1.5px 0 0 rgba(255,255,255,0.9) inset",
       }}
-      className="rounded-2xl p-6 flex flex-col gap-4 hover:shadow-xl transition-shadow will-change-transform"
+      className="relative rounded-2xl p-6 flex flex-col gap-4 glass-card backdrop-blur-md border shadow-[0_4px_24px_rgba(0,97,170,0.07)] hover:shadow-xl transition-all will-change-transform"
     >
       {/* Shine layer */}
       <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          borderRadius: "inherit",
-          background:
-            "linear-gradient(135deg, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0) 60%)",
-          pointerEvents: "none",
-        }}
+        className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/45 dark:from-white/5 to-transparent pointer-events-none"
       />
 
       {/* Icon */}
@@ -115,8 +101,8 @@ function TiltCard({ feature }) {
         className="flex flex-col gap-1.5"
         style={{ transform: "translateZ(30px)" }}
       >
-        <h3 className="text-base font-bold text-gray-900">{feature.title}</h3>
-        <p className="text-base leading-relaxed text-gray-500">
+        <h3 className="text-base font-bold text-gray-900 dark:text-white">{feature.title}</h3>
+        <p className="text-base leading-relaxed text-gray-550 dark:text-gray-300 font-medium">
           {feature.description}
         </p>
       </div>
@@ -133,39 +119,39 @@ export default function Features() {
       description:
         "Live status updates via WebSockets. See builds start and finish without refreshing the page.",
       Icon: Activity,
-      iconBg: "bg-slate-100 text-slate-600",
+      iconBg: "bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300",
     },
     {
       title: "Build time analytics",
       description:
         "Track average build duration per repo and workflow. Spot regressions before they slow your team down.",
       Icon: BarChart3,
-      iconBg: "bg-teal-50 text-teal-600",
+      iconBg: "bg-teal-50 dark:bg-teal-950/40 text-teal-600 dark:text-teal-450",
     },
     {
       title: "Flaky test detector",
       description:
         "Automatically identifies tests that fail intermittently across runs.",
       Icon: FlaskConical,
-      iconBg: "bg-amber-50 text-amber-600",
+      iconBg: "bg-amber-50 dark:bg-amber-950/40 text-amber-600 dark:text-amber-450",
     },
     {
       title: "Multi-repo view",
       description: "See all pipelines across your organisation in one place.",
       Icon: GitBranch,
-      iconBg: "bg-purple-50 text-purple-600",
+      iconBg: "bg-purple-50 dark:bg-purple-950/40 text-purple-600 dark:text-purple-450",
     },
     {
       title: "Team insights",
       description: "Deploy frequency and failure rate broken down by team.",
       Icon: Users,
-      iconBg: "bg-orange-50 text-orange-600",
+      iconBg: "bg-orange-50 dark:bg-orange-950/40 text-orange-600 dark:text-orange-450",
     },
     {
       title: "Failure intelligence",
       description: "Groups similar failures and pinpoints broken commits.",
       Icon: AlertTriangle,
-      iconBg: "bg-red-50 text-red-600",
+      iconBg: "bg-red-50 dark:bg-rose-950/40 text-red-600 dark:text-rose-450",
     },
   ];
 
@@ -176,18 +162,18 @@ export default function Features() {
       whileInView="visible"
       variants={containerVariants}
       viewport={{ once: true, amount: 0.25 }}
-      className="px-6 md:px-10 pt-4 pb-8 md:pt-8 md:pb-12 lg:pt-32 lg:pb-24 bg-[#FAFCFF]"
+      className="px-6 md:px-10 pt-4 pb-8 md:pt-8 md:pb-12 lg:pt-32 lg:pb-24 bg-[#FAFCFF] dark:bg-[#080B10] transition-colors duration-300"
     >
       <div className="mx-auto max-w-5xl">
         {/* Header */}
         <motion.div variants={cardVariants}>
-          <p className="mb-3 text-xs font-bold uppercase tracking-widest text-[#0061AA]">
+          <p className="mb-3 text-xs font-bold uppercase tracking-widest text-[#0061AA] dark:text-blue-400">
             Features
           </p>
-          <h2 className="mb-3 text-3xl font-bold tracking-tight text-gray-900 md:text-4xl lg:text-5xl">
+          <h2 className="mb-3 text-3xl font-bold tracking-tight text-gray-900 dark:text-white md:text-4xl lg:text-5xl">
             Everything your team needs to ship faster
           </h2>
-          <p className="mb-10 max-w-xl text-base leading-relaxed text-gray-600">
+          <p className="mb-10 max-w-xl text-base leading-relaxed text-gray-650 dark:text-gray-400">
             Built for engineering teams who care about speed and reliability.
           </p>
         </motion.div>

@@ -60,25 +60,12 @@ function TiltCard({ item }) {
         rotateY: rY,
         transformStyle: "preserve-3d",
         perspective: 1000,
-        background: "rgba(255, 255, 255, 0.55)",
-        backdropFilter: "blur(16px) saturate(160%)",
-        WebkitBackdropFilter: "blur(16px) saturate(160%)",
-        border: "1px solid rgba(255, 255, 255, 0.55)",
-        boxShadow:
-          "0 4px 24px 0 rgba(0, 97, 170, 0.07), 0 1.5px 0 0 rgba(255,255,255,0.9) inset",
       }}
-      className="relative flex items-start gap-4 rounded-2xl px-5 py-4 will-change-transform transition-shadow hover:shadow-xl"
+      className="relative flex items-start gap-4 rounded-2xl px-5 py-4 glass-card backdrop-blur-md border shadow-[0_4px_24px_rgba(0,97,170,0.07)] hover:shadow-xl transition-all will-change-transform"
     >
       {/* Shine layer */}
       <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          borderRadius: "inherit",
-          background:
-            "linear-gradient(135deg, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0) 60%)",
-          pointerEvents: "none",
-        }}
+        className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/45 dark:from-white/5 to-transparent pointer-events-none"
       />
 
       {/* Icon */}
@@ -97,10 +84,10 @@ function TiltCard({ item }) {
         className="flex flex-col gap-1.5"
         style={{ transform: "translateZ(20px)" }}
       >
-        <h3 className="text-base font-bold leading-snug text-gray-900">
+        <h3 className="text-base font-bold leading-snug text-gray-900 dark:text-white">
           {item.title}
         </h3>
-        <p className="text-base leading-relaxed text-gray-500">
+        <p className="text-base leading-relaxed text-gray-550 dark:text-gray-300 font-medium">
           {item.description}
         </p>
       </div>
@@ -115,21 +102,21 @@ export default function Analytics() {
       description:
         "How often are you shipping? Track daily, weekly, and monthly deploy cadence.",
       Icon: TrendingUp,
-      iconBg: "bg-blue-50 text-blue-600",
+      iconBg: "bg-blue-50 dark:bg-blue-950/30 text-blue-600 dark:text-blue-400",
     },
     {
       title: "Mean time to recovery",
       description:
         "How fast do you recover from a failed build? One of the 4 DORA metrics, built in.",
       Icon: Clock,
-      iconBg: "bg-orange-50 text-orange-600",
+      iconBg: "bg-orange-50 dark:bg-orange-950/30 text-orange-600 dark:text-orange-400",
     },
     {
       title: "Change failure rate",
       description:
         "What percentage of your deployments cause a failure? Track it over time.",
       Icon: AlertCircle,
-      iconBg: "bg-emerald-50 text-emerald-600",
+      iconBg: "bg-emerald-50 dark:bg-emerald-950/30 text-emerald-600 dark:text-emerald-400",
     },
   ];
 
@@ -139,28 +126,19 @@ export default function Analytics() {
       whileInView="visible"
       variants={containerVariants}
       viewport={{ once: true, amount: 0.2 }}
-      style={{
-        background: `
-    radial-gradient(ellipse at 20% 10%, #f3f8ff 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 10%, #f3f8ff 0%, transparent 50%),
-    radial-gradient(ellipse at 20% 90%, #f3f8ff 0%, transparent 50%),
-    radial-gradient(ellipse at 80% 90%, #f3f8ff 0%, transparent 50%),
-    #f6f9fd
-  `,
-      }}
-      className="px-6 md:px-10 py-8 md:py-12 lg:py-24"
+      className="analytics-section-bg px-6 md:px-10 py-8 md:py-12 lg:py-24 transition-colors duration-300"
     >
       <div className="mx-auto max-w-5xl flex flex-col gap-12 md:flex-row md:items-center md:gap-16">
         <motion.div className="md:w-2/5 shrink-0" variants={cardVariants}>
-          <p className="mb-3 text-xs font-bold uppercase tracking-widest text-[#0061AA]">
+          <p className="mb-3 text-xs font-bold uppercase tracking-widest text-[#0061AA] dark:text-blue-400">
             Analytics
           </p>
 
-          <h2 className="mb-5 text-3xl font-bold tracking-tight text-gray-900 md:text-4xl lg:text-5xl">
+          <h2 className="mb-5 text-3xl font-bold tracking-tight text-gray-900 dark:text-white md:text-4xl lg:text-5xl">
             Understand your pipeline health at a glance
           </h2>
 
-          <p className="text-base leading-relaxed text-gray-500">
+          <p className="text-base leading-relaxed text-gray-505 dark:text-gray-400">
             Go beyond pass/fail. Know your trends, your bottlenecks, and your
             team's delivery rhythm.
           </p>
